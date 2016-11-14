@@ -43,7 +43,7 @@
 まずは、公開されているスキルを使ってみましょう。[自分のアカウント設定](http://alexa.amazon.com/spa/index.html) の「Skills」でいろいろなスキルを追加できます。オススメは、Zoo Keeper、Trivia Japan、Sushi Facts です。  
 次に、自分でスキルを作ってみましょう。これにはAWSのアカウントが必要です。個人で使う程度ではよほどのことが無い限り無料で使えますので、この機会にアカウントを作ってみましょう。スキル開発手順の詳細は、[スキルテンプレート](https://developer.amazon.com/public/solutions/alexa/alexa-skills-kit/content/alexa-skills-developer-training)をご参照ください。  
 Trivia Skill template というのが作りやすいと思います。Alexaがトナカイに関するマニアックな4択クイズを出題するというスキルで、コピペで作りながらスキルの仕組みが理解できます。  
-好きなスピーチをAlexaにさせるなら、Fact Skill templateがオススメです。SDK等いくつかのファイルをzipにまとめてlambda にアップロードする必要がありますが、コンテンツを書き換える部分はシンプルになります。Lambdaに入るコードは[このように]()なります。
+好きなスピーチをAlexaにさせるなら、Fact Skill templateがオススメです。SDK等いくつかのファイルをzipにまとめてlambda にアップロードする必要がありますが、コンテンツを書き換える部分はシンプルになります。Lambdaに入るコードは[このように](../../blob/master/fact_skill.js)なります。※SDK等も入れる必要があるので、このコードだけでは動きません。
 
 ---
 
@@ -63,30 +63,34 @@ IFTTTでは、トリガーとアクションを設定しますが、Alexaはト�
 * [Adafruit IO](https://io.adafruit.com/):IFTTT経由でクラウド上のMQTTブローカーにデータを入れて、イルミネーション側に配信する仕組み。これなら安く簡単にできそうだと思ってやってみたら、動作させることができました。そのやり方とソースコードを説明します。
 
 まず、[こちらのAdafruitのガイド](https://learn.adafruit.com/remote-control-with-the-huzzah-plus-adafruit-io)を参考にしました。  
-# 必要機材
+### 必要機材
 
 * 上記のラズパイAlexa
 * [ESPr Developer開発ボード](https://www.switch-science.com/catalog/2500/) （半田不要の[ソケット付き](https://www.switch-science.com/catalog/2652/)もあります。）
 * NeoPixel [Ring-12連フルカラーシリアルLED](https://www.switch-science.com/catalog/1593/) （違うタイプでもコードを書き換えれば対応可能です。）
 
-# 手順1：Adafruit IOの準備
+### 手順1：Adafruit IOの準備
 
 [Adafruit IO](https://io.adafruit.com/)でアカウントを作り、データを入れる箱「Feed」を作成します。  
 Your Feed から、CREATE FEEDをクリック
 ![](../../blob/images/adafruit_io_1.jpg)
+
 Feedの名前と説明を適当に入れる。
 ![](../../blob/images/adafruit_io_2.jpg)
+
 VIEW AIO KEYSをクリックしてメモしておく。イルミネーション側がサブスクライブする時に必要になります。
 ![](../../blob/images/adafruit_io_3.jpg)
+
 ダッシュボードにボタンを作成します。MY DASHBOARDSからプラスマークのCreate a new blockをクリック。A gauge というところでCREATEをクリック。
 ![](../../blob/images/adafruit_io_4.jpg)
+
 先ほど作ったFeedを選択して、MIN VALUEを0、MAX VALUEを5に設定する。
 ![](../../blob/images/adafruit_io_5.jpg)
 
-# 手順2：Alexa側 IFTTTの設定
+### 手順2：Alexa側 IFTTTの設定
 
 
-# 手順3：ESPr側 MQTTサブスクライブ
+### 手順3：ESPr側 MQTTサブスクライブ
 
 
 ---
