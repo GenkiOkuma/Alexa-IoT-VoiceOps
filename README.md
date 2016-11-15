@@ -51,7 +51,7 @@ Trivia Skill template というのが作りやすいと思います。Alexaが�
 
 Alexaが[IFTTT](https://ifttt.com/)に対応しているので、LINE、ツイッター、Slackなど様々なアプリと連携できます。説明する必要が無いほど簡単に使えます。  
 IFTTTでは、トリガーとアクションを設定しますが、Alexaはトリガーのみサポートしています。下記のように12種類あり、Say a specific phraseというのが合言葉を言うだけのシンプルで、駆動が早いトリガーです。
-![](../../blob/images/ifttt_trigger.jpg)
+![](../../blob/images/ifttt_trigger2.jpg)
 
 ---
 
@@ -81,16 +81,24 @@ Feedの名前と説明を適当に入れます。
 
 VIEW AIO KEYSをクリックしてメモしておく。イルミネーション側がサブスクライブする時に必要になります。
 ※下記はサンプル画像なので、自分の環境でキーをメモしてください。
-![](../../blob/images/adafruit_io_3.jpg)
+![](../../blob/images/adafruit_io_6.jpg)
 
 ダッシュボードにボタンを作成します。MY DASHBOARDSからプラスマークのCreate a new blockをクリック。A gauge というところでCREATEをクリック。（A stream blockというのもログが見れるのでオススメです。後で追加してみてください。）
-![](../../blob/images/adafruit_io_4.jpg)
+![](../../blob/images/adafruit_io_7.jpg)
 
 先ほど作ったFeedを選択して、MIN VALUEを0、MAX VALUEを5に設定する。（0:オフ、1:赤、2:緑、3:青、4:虹、5:予備）
 ![](../../blob/images/adafruit_io_5.jpg)
 
 ### 手順2：Alexa側 IFTTTの設定
 
+[IFTTT](https://ifttt.com/)にログインして、New Appletを作成します。  
+トリガーにAlexaを選択して、初回はアカウント情報を入力。Say a specific phraseを選択して、「Neo Pixel Red」などと入力。単語でも文章でもOKですが、小文字しか入らないので注意。  
+アクションにAdafruitを選択して、初回はアカウント情報を入力。Send data to Adafruit IOを選択して、先ほど作成したFeedを選び、トリガーの言葉に対応する数値を入力。（0:オフ、1:赤、2:緑、3:青、4:虹、5:予備）そして、Create actionをクリック。
+![](../../blob/images/ifttt_1.jpg)
+
+できましたか？同様のアプレットを5種作ります。（0:オフ、1:赤、2:緑、3:青、4:虹）
+
+![](../../blob/images/ifttt_2.jpg)
 
 ### 手順3：ESPr側 MQTTサブスクライブ
 
