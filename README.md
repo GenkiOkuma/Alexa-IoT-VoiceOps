@@ -3,7 +3,7 @@
 ## このプロジェクトについて
 
 アマゾンの自然言語理解アシスタントサービス「Alexa」の公開されている開発環境を使ってIoTをやってみました。  
-ボイスコマンドからLINEのメッセージを送ったり、イルミネーションを制御するやり方とソースコードをこちらで公開します。  
+ボイスコマンドからLINEのメッセージを送ったり、イルミネーションを制御するやり方と[ソースコード](../../blob/master/sketch_alexa_neopixel.ino)をこちらで公開します。  
 費用もあまりかからず、面白いので是非やってみてください。  
 
 ---
@@ -92,7 +92,7 @@ VIEW AIO KEYSをクリックしてメモしておく。イルミネーション�
 ### 手順2：Alexa側 IFTTTの設定
 
 [IFTTT](https://ifttt.com/)にログインして、New Appletを作成します。  
-トリガーにAlexaを選択して、初回はアカウント情報を入力。Say a specific phraseを選択して、「Neo Pixel Red」などと入力。単語でも文章でもOKですが、小文字しか入らないので注意。  
+トリガーにAlexaを選択して、初回はアカウント情報を入力。Say a specific phraseを選択して、「neo pixel red」などと入力。単語でも文章でもOKですが、小文字しか入らないので注意。  
 アクションにAdafruitを選択して、初回はアカウント情報を入力。Send data to Adafruit IOを選択して、先ほど作成したFeedを選び、トリガーの言葉に対応する数値を入力。（0:オフ、1:赤、2:緑、3:青、4:虹、5:予備）そして、Create actionをクリック。
 ![](../../blob/images/ifttt_1.jpg)
 
@@ -104,10 +104,14 @@ VIEW AIO KEYSをクリックしてメモしておく。イルミネーション�
 
 まずは、ESPr Developer開発ボードの環境をセットアップします。[こちらのサイト](https://www.mgo-tec.com/blog-entry-ss-wroom-howto01.html)がとても勉強になります。このサイトにある通り、[Arduino.cc](https://www.arduino.cc/en/Main/Software)のIDEをインストールする必要があり、Arduino.orgのIDEをインストールしてはダメです。こちらのサイトを参考にしてArduinoスケッチをESPr Developerに書き込んでスマホと通信できるくらいまでご確認ください。
 
+Neo Pixelのセットアップは簡単です。VCC、GND、信号線の3本をESPrと繋げるだけです。ワニ口クリップがあると便利です。本当は、[コンデンサと抵抗を入れないといけない](http://k183.bake-neko.net/densi/page6.html)のですが、めんどくさくなってやめました・・・。ESPrの3Vくらいだったらいいかな^^;（自己責任で）  
+信号線はArduinoスケッチで定義するので何番でもOKですが、とりあえず2番にしてみましょう。
+![](../../blob/images/ESPr_1.jpg)
+
 Arduino.ccのIDEが準備できたら、スケッチ新規作成で[sketch_alexa_neopixel.ino](../../blob/master/sketch_alexa_neopixel.ino)のコードをコピペしてください。日本語でコメントしている部分は、自分の環境の値に書き換えてください。
 ![](../../blob/images/arduino_1.jpg)
 
-このスケッチで使うライブラリをArduino IDEに追加します。スケッチ→ライブラリをインクルード→ライブラリを管理を開いてください。
+このスケッチで使うライブラリをArduino IDEに追加します。スケッチ→ライブラリをインクルード→ライブラリを管理　を開いてください。
 ![](../../blob/images/arduino_2.jpg)
 
 mqttで検索して、Adafruit MQTT Libraryの最新版をインストール。
