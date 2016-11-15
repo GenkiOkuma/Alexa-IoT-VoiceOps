@@ -43,7 +43,7 @@
 まずは、公開されているスキルを使ってみましょう。[自分のアカウント設定](http://alexa.amazon.com/spa/index.html) の「Skills」でいろいろなスキルを追加できます。オススメは、Zoo Keeper、Trivia Japan、Sushi Facts です。  
 次に、自分でスキルを作ってみましょう。これにはAWSのアカウントが必要です。個人で使う程度ではよほどのことが無い限り無料で使えますので、この機会にアカウントを作ってみましょう。スキル開発手順の詳細は、[スキルテンプレート](https://developer.amazon.com/public/solutions/alexa/alexa-skills-kit/content/alexa-skills-developer-training)をご参照ください。  
 Trivia Skill template というのが作りやすいと思います。Alexaがトナカイに関するマニアックな4択クイズを出題するというスキルで、コピペで作りながらスキルの仕組みが理解できます。  
-好きなスピーチをAlexaにさせるなら、Fact Skill templateがオススメです。SDK等いくつかのファイルをzipにまとめてlambda にアップロードする必要がありますが、コンテンツを書き換える部分はシンプルになります。Lambdaに入るコードは[このように](../../blob/master/fact_skill.js)なります。※SDK等も入れる必要があるので、このコードだけでは動きません。
+好きなスピーチをAlexaにさせるなら、Fact Skill templateがオススメです。SDK等いくつかのファイルをzipにまとめてlambda にアップロードする必要がありますが、コンテンツを書き換える部分はシンプルになります。Lambdaに入るコードは、このプロジェクトにアップロードしている[fact_skill.js](../../blob/master/fact_skill.js)のようになります。※SDK等も入れる必要があるので、このコードだけでは動きません。
 
 ---
 
@@ -59,7 +59,7 @@ IFTTTでは、トリガーとアクションを設定しますが、Alexaはト�
 
 クリスマスに向けて、魔法の呪文でイルミネーションの色を変えようと思い、下記のような構成を検討しました。  
 * Alexa Skills Kit：上記のようにAWSのLambdaにスキルを追加する構成ですが、テンプレをいじってできる感じではなかったので断念。[このサイト] (https://aaroneiche.com/2016/01/03/weekend-project-amazon-echo-led-control/)が近い感じでしたが、難しそう・・・。
-* [Smart Home Skill API](https://developer.amazon.com/alexa/smart-home)：イルミネーション側でOAuth2.0に対応しなければいけないということで断念。OAuth2.0に対応するために、イルミネーション側にもそれなりのコンピュータリソースと費用が必要な印象を受けました。
+* [Smart Home Skill API](https://developer.amazon.com/alexa/smart-home)：イルミネーション側でOAuth2.0に対応しなければいけないということで断念。OAuth2.0に対応するために、イルミネーション側にもそれなりのコンピュータリソースと費用が必要な印象を受けました。IoTで制御はセキュリティをちゃんと考えないといけないので大変ですね^^;
 * [Adafruit IO](https://io.adafruit.com/):IFTTT経由でクラウド上のMQTTブローカーにデータを入れて、イルミネーション側に配信する仕組み。これなら安く簡単にできそうだと思ってやってみたら、動作させることができました。そのやり方とソースコードを説明します。
 
 まず、[こちらのAdafruitのガイド](https://learn.adafruit.com/remote-control-with-the-huzzah-plus-adafruit-io)を参考にしました。  
@@ -75,16 +75,18 @@ IFTTTでは、トリガーとアクションを設定しますが、Alexaはト�
 Your Feed から、CREATE FEEDをクリック
 ![](../../blob/images/adafruit_io_1.jpg)
 
-Feedの名前と説明を適当に入れる。
+Feedの名前と説明を適当に入れます。
+
 ![](../../blob/images/adafruit_io_2.jpg)
 
 VIEW AIO KEYSをクリックしてメモしておく。イルミネーション側がサブスクライブする時に必要になります。
+※下記はサンプル画像なので、自分の環境でキーをメモしてください。
 ![](../../blob/images/adafruit_io_3.jpg)
 
-ダッシュボードにボタンを作成します。MY DASHBOARDSからプラスマークのCreate a new blockをクリック。A gauge というところでCREATEをクリック。
+ダッシュボードにボタンを作成します。MY DASHBOARDSからプラスマークのCreate a new blockをクリック。A gauge というところでCREATEをクリック。（A stream blockというのもログが見れるのでオススメです。後で追加してみてください。）
 ![](../../blob/images/adafruit_io_4.jpg)
 
-先ほど作ったFeedを選択して、MIN VALUEを0、MAX VALUEを5に設定する。
+先ほど作ったFeedを選択して、MIN VALUEを0、MAX VALUEを5に設定する。（0:オフ、1:赤、2:緑、3:青、4:虹、5:予備）
 ![](../../blob/images/adafruit_io_5.jpg)
 
 ### 手順2：Alexa側 IFTTTの設定
@@ -95,7 +97,7 @@ VIEW AIO KEYSをクリックしてメモしておく。イルミネーション�
 
 ---
 
-## その他参考資料
+## その他関連資料
 
 動画、プレゼン資料
 
