@@ -102,11 +102,36 @@ VIEW AIO KEYSをクリックしてメモしておく。イルミネーション�
 
 ### 手順3：ESPr側 MQTTサブスクライブ
 
+まずは、ESPr Developer開発ボードの環境をセットアップします。[こちらのサイト](https://www.mgo-tec.com/blog-entry-ss-wroom-howto01.html)がとても勉強になります。このサイトにある通り、[Arduino.cc](https://www.arduino.cc/en/Main/Software)のIDEをインストールする必要があり、Arduino.orgのIDEをインストールしてはダメです。こちらのサイトを参考にしてArduinoスケッチをESPr Developerに書き込んでスマホと通信できるくらいまでご確認ください。
+
+Arduino.ccのIDEが準備できたら、スケッチ新規作成で[sketch_alexa_neopixel.ino](../../blob/master/sketch_alexa_neopixel.ino)のコードをコピペしてください。日本語でコメントしている部分は、自分の環境の値に書き換えてください。
+![](../../blob/images/arduino_1.jpg)
+
+このスケッチで使うライブラリをArduino IDEに追加します。スケッチ→ライブラリをインクルード→ライブラリを管理を開いてください。
+![](../../blob/images/arduino_2.jpg)
+
+mqttで検索して、Adafruit MQTT Libraryの最新版をインストール。
+![](../../blob/images/arduino_3.jpg)
+
+neopixelで検索して、Adafruit NeoPixelの最新版をインストール。
+![](../../blob/images/arduino_4.jpg)
+
+ESP8266関連のライブラリは、ESPr Developer開発ボードのセットアップの段階で入っていると思います。  
+それでは、スケッチをESPrに書き込んで、動作確認してみましょう。
+
+### 手順4：動作確認
+
+ESPr側を起動した状態で、シリアルモニタを開いてみましょう。ここでESPrのログをモニターすることができます。
+FEEDには手動で値を入れられるので、ボイスコマンドの前に手入力で動作確認するのがお手軽です。FEEDのプラスボタンを押して値を入力してください。
+![](../../blob/images/adafruit_io_8.jpg)
+
+期待通りに動きましたか？原因不明ですがESPrのシリアルモニタを見てると、しょっちゅうPacket Dropを起こしてAdafruit IOからのデータを拾うことができません。時間を空けてみたりして繰り返しやってると反応してくれます。MQTTのQOS0みたいな状態になっていて、MQTTブローカー（ここではAdafruit IO）から1回しか情報が配信されず、MQTTサブスクライバー（ここではESPr）が受け取ったかどうかを返してない、最新の状態を見れてないということだと推測します。
 
 ---
 
 ## その他関連資料
 
-動画、プレゼン資料
+[デモ動画]()もご覧ください。  
+[プレゼン資料]()もご覧ください。
 
 ---
