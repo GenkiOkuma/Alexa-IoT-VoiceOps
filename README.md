@@ -8,6 +8,13 @@
 
 ---
 
+## 関連資料
+
+[デモ動画]()もご覧ください。  
+[プレゼン資料]()もご覧ください。
+
+---
+
 ## ライセンス等に関する重要事項
 
 * This sample app and associated projects are provided for **prototyping purposes only**. Included client code, including earcons (start listening, stop listening, and error sounds) **SHALL NOT** be used in production. For implementation and design guidance for commercial products, please see [Designing for AVS](https://developer.amazon.com/public/solutions/alexa/alexa-voice-service/content/designing-for-the-alexa-voice-service).
@@ -104,7 +111,7 @@ VIEW AIO KEYSをクリックしてメモしておく。イルミネーション�
 
 まずは、ESPr Developer開発ボードの環境をセットアップします。[こちらのサイト](https://www.mgo-tec.com/blog-entry-ss-wroom-howto01.html)がとても勉強になります。このサイトにある通り、[Arduino.cc](https://www.arduino.cc/en/Main/Software)のIDEをインストールする必要があり、Arduino.orgのIDEをインストールしてはダメです。こちらのサイトを参考にしてArduinoスケッチをESPr Developerに書き込んでスマホと通信できるくらいまでご確認ください。
 
-Neo Pixelのセットアップは簡単です。VCC、GND、信号線の3本をESPrと繋げるだけです。ワニ口クリップがあると便利です。本当は、[コンデンサと抵抗を入れないといけない](http://k183.bake-neko.net/densi/page6.html)のですが、めんどくさくなってやめました・・・。ESPrの3Vくらいだったらいいかな^^;（自己責任で）  
+Neo Pixelのセットアップは簡単です。VCC、GND、信号線の3本をESPrと繋げるだけです。ワニぐちクリップがあると便利です。本当は、[コンデンサと抵抗を入れないといけない](http://k183.bake-neko.net/densi/page6.html)のですが、めんどくさくなってやめました・・・。ESPrの3Vくらいだったらいいかな^^;（自己責任で）  
 信号線はArduinoスケッチで定義するので何番でもOKですが、とりあえず2番にしてみましょう。
 ![](../../blob/images/ESPr_1.jpg)
 
@@ -129,13 +136,7 @@ ESPr側を起動した状態で、シリアルモニタを開いてみましょ�
 FEEDには手動で値を入れられるので、ボイスコマンドの前に手入力で動作確認するのがお手軽です。FEEDのプラスボタンを押して値を入力してください。
 ![](../../blob/images/adafruit_io_8.jpg)
 
-期待通りに動きましたか？原因不明ですがESPrのシリアルモニタを見てると、しょっちゅうPacket Dropを起こしてAdafruit IOからのデータを拾うことができません。時間を空けてみたりして繰り返しやってると反応してくれます。MQTTのQOS0みたいな状態になっていて、MQTTブローカー（ここではAdafruit IO）から1回しか情報が配信されず、MQTTサブスクライバー（ここではESPr）が受け取ったかどうかを返してない、最新の状態を見れてないということだと推測します。
+期待通りに動きましたか？原因不明ですがESPrのシリアルモニタを見てると、しょっちゅうPacket Dropを起こしてAdafruit IOからのデータを拾うことができません。時間を空けてみたりして繰り返しやってると反応してくれます。MQTTのQoS0みたいな状態になっていて、MQTTブローカー（ここではAdafruit IO）から1回しか情報が配信されず、MQTTサブスクライバー（ここではESPr）が受け取ったかどうかを見ていない、MQTTの機能であるWillやRetainが実装されていないということだと推測します。タダで使ってるし、贅沢は言えないですね。
 
 ---
 
-## その他関連資料
-
-[デモ動画]()もご覧ください。  
-[プレゼン資料]()もご覧ください。
-
----
