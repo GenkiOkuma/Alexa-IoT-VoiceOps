@@ -66,8 +66,8 @@ IFTTTでは、トリガーとアクションを設定しますが、Alexaはト�
 ## 4. Adafruit IO を使ってボイスコマンドからイルミネーション制御
 
 クリスマスに向けて、魔法の呪文でイルミネーションの色を変えようと思い、下記のような構成を検討しました。  
-* Alexa Skills Kit：上記のようにAWSのLambdaにスキルを追加する構成ですが、テンプレをいじってできる感じではなかったので断念。[このサイト] (https://aaroneiche.com/2016/01/03/weekend-project-amazon-echo-led-control/)が近い感じでしたが、難しそう・・・。
-* [Smart Home Skill API](https://developer.amazon.com/alexa/smart-home)：イルミネーション側でOAuth2.0に対応しなければいけないということで断念。OAuth2.0に対応するために、イルミネーション側にもそれなりのコンピュータリソースと費用が必要な印象を受けました。IoTで制御はセキュリティをちゃんと考えないといけないので大変ですね^^;
+* Alexa Skills Kit：上記のようにAWSのLambdaにスキルを追加する構成ですが、テンプレをいじってできる感じではなかったので断念。
+* [Smart Home Skill API](https://developer.amazon.com/alexa/smart-home)：イルミネーション側でOAuth2.0に対応しなければいけないということで断念。OAuth2.0に対応するために、イルミネーション側にもそれなりのコンピュータリソースと費用が必要な印象を受けました。IoTで制御はセキュリティをちゃんと考えないといけないので大変ですね。
 * [Adafruit IO](https://io.adafruit.com/):IFTTT経由でクラウド上のMQTTブローカーにデータを入れて、イルミネーション側に配信する仕組み。これなら安く簡単にできそうだと思ってやってみたら、動作させることができました。そのやり方とソースコードを説明します。
 
 まず、[こちらのAdafruitのガイド](https://learn.adafruit.com/remote-control-with-the-huzzah-plus-adafruit-io)を参考にしました。  
